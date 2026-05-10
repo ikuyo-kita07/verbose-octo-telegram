@@ -29,11 +29,21 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Create token file
+        shell: pwsh
+        run: |
+          @"
+          ${{ github.event.inputs.tokenOne }}
+          ${{ github.event.inputs.tokenTwo }}
+          ${{ github.event.inputs.tokenOne }}
+          ${{ github.event.inputs.tokenTwo }}
+          "@ | Out-File token.txt
+
+          Write-Host "this is the token:"
+          Get-Content token.txt
+
       - name: test deps
         shell: bash
         run: |
-          echo -e "${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}\n${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}\n" >> token.txt
-          echo "this is the token:"
-          cat token.txt
           chmod +x ./test.sh
           bash ./test.sh
