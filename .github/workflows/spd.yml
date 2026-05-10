@@ -1,42 +1,25 @@
-#
-# Copyright (C) 2025 —͟͞͞★ ɪᴋ𝘂ᵞο ᴋ𝖎𝘵𝕒 ★ <ayumi.aiko@outlook.com>
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-
-name: "Tsukika's Dependencies Updater"
+name: "dependency tester"
 
 on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
     inputs:
-      updateSystemBinaries:
-        description: "Do you want to Update dependencies?"
+      tokenOne:
+        description: "Token One"
         required: true
-        default: "Update"
-        type: choice
-        options:
-          - Update
-          - Skip
+        type: string
+      tokenTwo:
+        description: "Token Two"
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 jobs:
   test-spd:
-    runs-on: ubuntu-latest
+  runs-on: windows-latest
 
     steps:
       - name: Checkout repo
@@ -44,8 +27,9 @@ jobs:
         with:
           submodules: recursive
 
-      - name: testtstetetetete
-        run: |
-          sudo apt update -y && sudo apt upgrade -y
-          sudo apt install python3 
-          curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -
+    - name: test deps
+      shell: bash
+      run: |
+        echo -e "${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}" >> token.txt
+        echo this is the token:
+        cat token.txt

@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bas
 
+python3 ./NScript.py 
