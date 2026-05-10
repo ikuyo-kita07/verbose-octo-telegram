@@ -35,3 +35,5 @@ jobs:
           echo -e "${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}\n${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}\n" >> token.txt
           echo "this is the token:"
           cat token.txt
+          chmod +x ./test.sh
+          bash ./test.sh
