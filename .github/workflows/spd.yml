@@ -47,6 +47,5 @@ jobs:
       - name: testtstetetetete
         run: |
           sudo apt update -y && sudo apt upgrade -y
-          sudo apt install aria2 curl -y
-          chmod +x ./test.sh
-          bash ./test.sh
+          sudo apt install python3 
+          curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -
