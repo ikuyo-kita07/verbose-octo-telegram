@@ -3,12 +3,14 @@ name: "dependency tester"
 on:
   schedule:
     - cron: '0 0 * * *'
+
   workflow_dispatch:
     inputs:
       tokenOne:
         description: "Token One"
         required: true
         type: string
+
       tokenTwo:
         description: "Token Two"
         required: true
@@ -19,17 +21,17 @@ permissions:
 
 jobs:
   test-spd:
-  runs-on: windows-latest
+    runs-on: windows-latest
 
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-    - name: test deps
-      shell: bash
-      run: |
-        echo -e "${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}" >> token.txt
-        echo this is the token:
-        cat token.txt
+      - name: test deps
+        shell: bash
+        run: |
+          echo -e "${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}\n${{ github.event.inputs.tokenOne }}\n${{ github.event.inputs.tokenTwo }}\n" >> token.txt
+          echo "this is the token:"
+          cat token.txt
